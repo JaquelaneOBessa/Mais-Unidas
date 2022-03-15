@@ -9,10 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 
@@ -28,8 +31,10 @@ public class Usuario {
 	@Size(min=1,max=255,message="o nome deve conter entre 1 e 255 caracteres")
 	private String nome_completo;
 	
+	@Schema(example = "email@email.com")
 	@NotBlank
 	@Size(min=1,max=350,message="o usuario deve conter entre 1 e 350 caracteres")
+	@Email
 	private String usuario;
 	
 	@NotBlank
@@ -40,6 +45,16 @@ public class Usuario {
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
 
+	public Usuario(long id, String nome, String usuario, String senha) {
+		this.id = id;
+		this.nome_completo = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		
+	}
+	
+	public Usuario() {}
+	
 	public long getId() {
 		return id;
 	}

@@ -54,7 +54,6 @@ public class TemaController {
 	public ResponseEntity<List<Tema>> findByDescricaoPostagem(@PathVariable String nome ){
 		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
 		
-		
 	}
 	
 	
